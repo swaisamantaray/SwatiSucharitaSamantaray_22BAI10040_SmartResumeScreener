@@ -12,6 +12,11 @@ UPLOADS = os.path.join(os.path.dirname(__file__), "uploads")
 os.makedirs(UPLOADS, exist_ok=True)
 init_db()
 
+@app.get("/")
+def home():
+    return {"message": "✅ Smart Resume Screener API is running. Visit /docs to test endpoints."}
+
+
 @app.post('/upload_resume')
 async def upload_resume(file: UploadFile = File(...), candidate_name: str = Form(None)):
     # save uploaded file
@@ -32,7 +37,6 @@ async def match_resume_with_jd(resume_text: str = Form(...), job_description: st
 
 @app.post('/match_by_resume_id')
 async def match_by_resume_id(resume_id: int = Form(...), job_description: str = Form(...)):
-    # in a simple demo we store resume text in DB; fetch it
     from .database import get_resume_text
     resume_text = get_resume_text(resume_id)
     if resume_text is None:

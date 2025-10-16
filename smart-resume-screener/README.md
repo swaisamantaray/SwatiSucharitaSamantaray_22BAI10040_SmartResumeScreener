@@ -1,58 +1,37 @@
-# Smart Resume Screener
+*Smart Resume Screener
 
-**Objective:** Intelligently parse resumes, extract skills & structured data, and match them with job descriptions.
+Objective:
+I built an intelligent system to parse resumes, extract skills and structured data, and match them with job descriptions to help recruiters quickly identify the best candidates.
 
-## Features
-- Upload PDF/Text resumes and job descriptions
-- Parse resume text using PyMuPDF
-- Compute semantic match score (1-10) using TF-IDF cosine similarity
-- Store parsed data and results in SQLite
-- Simple frontend to upload files and request matching
+Features
 
-## Quick start (local)
-1. Create a virtual environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate    # macOS / Linux
-   venv\Scripts\activate     # Windows
-   ```
-2. Install dependencies:
-   ```bash
-   pip install -r backend/requirements.txt
-   ```
-3. Run the backend:
-   ```bash
-   cd backend
-   uvicorn app:app --reload --port 8000
-   ```
-4. Open `frontend/index.html` in your browser to use the simple UI.
+* Upload resumes (PDF/Text) and job descriptions.
+* Parse resume content using **PyMuPDF** for accurate text extraction.
+* Compute a **semantic match score (1-10)** using TF-IDF cosine similarity.
+* Store parsed data and matching results in **SQLite**.
+* Simple frontend for uploading files and requesting match results.
 
-## Project structure
+Project Structure
+
 ```
 smart-resume-screener/
 ├── backend/
-│   ├── app.py
-│   ├── resume_parser.py
-│   ├── matcher.py
-│   ├── database.py
-│   └── requirements.txt
+│   ├── app.py             # FastAPI backend
+│   ├── resume_parser.py   # Logic to extract text and structured info from resumes
+│   ├── matcher.py         # TF-IDF similarity and matching logic
+│   ├── database.py        # SQLite database setup and operations
+│   └── requirements.txt   # Python dependencies
 ├── frontend/
-│   ├── index.html
-│   ├── app.js
-│   └── styles.css
+│   ├── index.html         # Simple upload interface
+│   ├── app.js             # Frontend logic for file uploads
+│   └── styles.css         # Basic styling
 ├── data/
-│   ├── sample_resumes/
-│   └── job_descriptions/
+│   ├── sample_resumes/    # Store sample resumes for testing
+│   └── job_descriptions/  # Store job descriptions
 ├── tests/
-│   ├── test_parser.py
-│   └── test_matcher.py
+│   ├── test_parser.py     # Tests for resume parsing
+│   └── test_matcher.py    # Tests for matching logic
 └── README.md
-```
 
-## Notes
-- The matcher uses TF-IDF similarity as a simple, dependency-light fallback to produce an interpretable score.
-- If you want to integrate an LLM (OpenAI), update `matcher.py` to call the API and include prompts (see code comments).
-- Add real sample resumes under `data/sample_resumes/` before running tests or demos.
 
-## License
-MIT
+
